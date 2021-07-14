@@ -4,8 +4,9 @@
     <title>Semantic label extraction</title>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
+    <!-- Add icon library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
       html, body {
       height: 100%;
@@ -126,24 +127,55 @@
       width: 48%;
       }
       }
-      
+
       input:valid{
-        border: 1px solid #32CD32; 
+        border: 1px solid #32CD32;
+      }
+
+      #pageloader
+      {
+        background: rgba( 255, 255, 255, 1.0 );
+        display: none;
+        height: 100%;
+        position: fixed;
+        width: 100%;
+        z-index: 9999;
+      }
+
+      #pageloader img
+      {
+        height: 80%;
+        position: fixed;
+        width: 60%;
+        left: 300px ;
+        top: 100px;
       }
     </style>
   </head>
   <body>
+  <script type="text/javascript">
+  $(document).ready(function(){
+    $("#myform").on("submit", function(){
+      $("#pageloader").fadeIn();
+    });//submit
+  });//document ready
+  </script>
+
+    <div id="pageloader">
+      <img src="https://i.pinimg.com/originals/12/6c/a6/126ca6bcc2616e4edf09f466e9925396.gif" alt="processing..." />
+    </div>
+
     <div class="main-block">
       <img src="{{url_for('static', filename='pipe.jpg')}}" />
       <h1>Semantic Label Extraction</h1>
 
-      <form action="/data/" method = "POST">
+      <form id="myform" action="/data/" method = "POST">
         <div class="info">
           <input class="fname" type="text" name="table" placeholder="Insert a table" required>
           <input class="fname" type="text" name="column" placeholder="Choose a column" required>
           <input class="fname" type="text" name="labels" placeholder="Choose your labels" required>
         </div>
-        <button class="button">Find the label</button>
+        <button class="button" href="/">Find the label</button>
       </form>
     </div>
   </body>
