@@ -69,13 +69,19 @@ def datas():
         return f""
     if request.method == 'POST':
         form = request.form
+        db = form["db"]
         table = form["table"]
         column = form["column"]
         labels = form["labels"]
+        ip = form["ip"]
+        port = form["port"]
         labels = labels.replace(", " or " ," ,  "-").split("-")
         start = time.time()
         try:
-            url = 'http://localhost:8123/?query=SELECT top ' + str(RECORDS_NUMBER) + ' ' + column + ' ' + 'FROM extracted_data.' + table
+            if ip == "" :
+                url = 'http://localhost:' + port + '/?query=SELECT top '  + str(RECORDS_NUMBER) + ' ' + column + ' ' + 'FROM'+ ' ' + db +'.' + table
+            else:
+               url = 'http://' + ip +':'+ port + '/?query=SELECT top '  + str(RECORDS_NUMBER) + ' ' + column + ' ' + 'FROM'+ ' ' + db +'.' + table
             r = requests.get(url)
             label_predict, max_score, occorrenze = classification(r,labels)
         except ConnectionError:
