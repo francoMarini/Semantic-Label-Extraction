@@ -36,7 +36,7 @@
           color: #000000;
           top: 10%;
           left: 50%;
-          transform: translate(-50%, 270%);
+          transform: translate(-50%, 108%);
           font-family: cursive;
       }
 
@@ -85,6 +85,25 @@
               }
           }
       }
+      .buttons-con .action-link-wrap {
+        margin-top: 300px;
+      }
+      .buttons-con .action-link-wrap a {
+        background: #68c950;
+        padding: 8px 25px;
+        border-radius: 4px;
+        color: #FFF;
+        font-weight: bold;
+        font-size: 14px;
+        transition: all 0.3s linear;
+        cursor: pointer;
+        text-decoration: none;
+        margin-right: 10px
+      }
+      .buttons-con .action-link-wrap a:hover {
+        background: #5A5C6C;
+        color: #fff;
+      }
     </style>
 
   </head>
@@ -114,5 +133,10 @@
 		  </tbody>
 	  </table>
     </div>
+    <div class="buttons-con">
+      <div class="action-link-wrap">
+        <a href="http://127.0.0.1:5000" class="link-button">Extract a new label</a>
+      </div>
+  </div>
   </body>
 </html>
