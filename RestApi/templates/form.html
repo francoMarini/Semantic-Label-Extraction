@@ -39,10 +39,10 @@
       background-size: cover;
       }
       form {
-      width: 80%;
+      width: 60%;
       padding: 25px;
       margin-bottom: 20px;
-      background: rgba(0, 0, 0, 0.9);
+      background: rgba(0, 0, 0, 0.8);
       }
       input, select {
       padding: 5px;
@@ -121,7 +121,10 @@
       width: 46%;
       }
       input.fname {
-      width: 100%;
+      width: 90%;
+      }
+      input.fname2 {
+      width: 45%;
       }
       select {
       width: 48%;
@@ -166,17 +169,21 @@
     </div>
 
     <div class="main-block">
-      <img src="{{url_for('static', filename='pipe.jpg')}}" />
+      <img src="{{url_for('static', filename='pipe.jpg')}}" width="500" ,height="600"  />
       <h1>Semantic Label Extraction</h1>
 
       <form id="myform" action="/data/" method = "POST">
         <div class="info">
+
+          <input class="fname2" type="text" name="ip" placeholder="Server IP">
+          <input class="fname2" type="text" name="port" placeholder="Port" required>
+        </div>
+          <br/><br/>
+          <div>
           <input class="fname" type="text" name="db" placeholder="Choose your database" required>
           <input class="fname" type="text" name="table" placeholder="Insert a table" required>
           <input class="fname" type="text" name="column" placeholder="Choose a column" required>
           <input class="fname" type="text" name="labels" placeholder="Choose your labels" required>
-          <input class="fname" type="text" name="ip" placeholder="Server ip">
-          <input class="fname" type="text" name="port" placeholder="Port" required>
         </div>
         <button class="button" href="/">Find the label</button>
       </form>
