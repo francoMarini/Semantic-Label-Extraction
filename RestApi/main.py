@@ -1,21 +1,18 @@
 import requests
 import tensorflow
+import time
+import datetime
 from requests.exceptions import ConnectionError
 from flask import Flask, render_template, request
 from transformers import pipeline
 app = Flask(__name__)
 
+RECORDS_NUMBER = 100
 
 
-
-def classification(table, column, labels):
-    RECORDS_NUMBER = 100
-    url = 'http://localhost:8123/?query=SELECT top ' + str(RECORDS_NUMBER) + ' ' + column + ' ' + 'FROM extracted_data.' + table
-    r = requests.get(url)
-    try:
-        r = requests.get(url)
-    except ConnectionError:
-        print("Il collegamento al database non è attivo.")
+def classification(r, labels):
+    
+    
 
     # L'utf-8-sig è una variante Python di UTF-8 che ci permette di eliminare, se presenti, eventuali carattere UTF-8 BOM.
     values = r.content.decode('utf-8-sig')
@@ -69,15 +66,27 @@ def data():
 @app.route('/data/', methods = ['POST', 'GET'])
 def datas():
     if request.method == 'GET':
-        return f"ciaoo"
+        return f""
     if request.method == 'POST':
         form = request.form
         table = form["table"]
         column = form["column"]
         labels = form["labels"]
         labels = labels.replace(", " or " ," ,  "-").split("-")
-        label_predict, max_score, occorrenze = classification(table, column, labels)
-        list = [ label_predict, max_score, occorrenze]
+        time.sleep(10)
+        start = time.time()
+        try:
+            url = 'http://localhost:8123/?query=SELECT top ' + str(RECORDS_NUMBER) + ' ' + column + ' ' + 'FROM extracted_data.' + table
+            r = requests.get(url)
+            label_predict, max_score, occorrenze = classification(r,labels)
+        except ConnectionError:
+            return render_template('im.html')
+        except IndexError:
+            return render_template('indNot.html')
+        
+        final = time.time() - start
+        final = int(float("{:.2f}".format(final)))
+        list = [ 1,2,3, datetime.timedelta(seconds=final)]
         return render_template('data.html', form_data=list)
 
 if __name__ == "__main__":
