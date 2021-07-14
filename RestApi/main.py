@@ -73,7 +73,6 @@ def datas():
         column = form["column"]
         labels = form["labels"]
         labels = labels.replace(", " or " ," ,  "-").split("-")
-        time.sleep(10)
         start = time.time()
         try:
             url = 'http://localhost:8123/?query=SELECT top ' + str(RECORDS_NUMBER) + ' ' + column + ' ' + 'FROM extracted_data.' + table
@@ -86,7 +85,7 @@ def datas():
         
         final = time.time() - start
         final = int(float("{:.2f}".format(final)))
-        list = [ 1,2,3, datetime.timedelta(seconds=final)]
+        list = [ label_predict,max_score,occorrenze, datetime.timedelta(seconds=final)]
         return render_template('data.html', form_data=list)
 
 if __name__ == "__main__":
