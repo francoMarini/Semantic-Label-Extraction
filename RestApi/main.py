@@ -75,7 +75,7 @@ def datas():
         labels = form["labels"]
         ip = form["ip"]
         port = form["port"]
-        labels = labels.replace(", " or " ," ,  "-").split("-")
+        labels = [elem.strip() for elem in labels.split(',')]
         start = time.time()
         try:
             if ip == "" :
