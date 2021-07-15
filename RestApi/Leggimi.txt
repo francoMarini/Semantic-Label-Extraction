@@ -1,3 +1,0 @@
-- Scaricare la cartella.
-- Avviare il progetto tramite pycharm, installando prima le dipendenze elencate nel file requirements.txt. Per farlo andare su File > New Projects Settings > Prefrences for New Projects > Python Interpreter. Cliccare su + in basso e  ricercare nella barra di ricerca il package necessario e installarlo.
-- Collegarsi a http://127.0.0.1:5000/ cliccabile anche dalla python console che apparirà in basso.
