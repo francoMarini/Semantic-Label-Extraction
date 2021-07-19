@@ -26,17 +26,17 @@
           color: #000000;
           top: 30%;
           left: 50%;
-          transform: translate(-50%, -50%);
+          transform: translate(-50%, -160%);
           font-family: Apple Chancery;
       }
-      .time{
+      .container .time{
           position: absolute;
           font-weight: 400;
           font-size: 22px;
           color: #000000;
           top: 10%;
           left: 50%;
-          transform: translate(-50%, 108%);
+          transform: translate(-50%, -370%);
           font-family: cursive;
       }
 
@@ -112,31 +112,42 @@
       <h1>Classification complete</h1>
     </div>
     <div class="container">
+    
+    <div class="container">
     <div class="time">
       <nobr>Time to extraction = {{form_data[3]}} s</nobr>
     </div>
-    <div class="container">
 	  <table>
 		  <thead>
-			  <tr>
+			  <tr >
 				  <th>Etichetta predetta</th>
 				  <th>Grado di affidabilità</th>
 				  <th>Num. di volte etichetta predetta su 100 campioni</th>
 			  </tr>
 		  </thead>
 		  <tbody>
-			  <tr>
-				  <td>{{form_data[0]}}</td>
-				  <td>{{form_data[1]}}</td>
-				  <td>{{form_data[2]}}</td>
-			  </tr>
-		  </tbody>
+      <tr style="background-color:#FF8C00">
+        <td>{{form_data[0]}}</td>
+        <td>{{form_data[1]}}</td>
+        <td>{{form_data[2]}}</td>
+      </tr>
+  		
+      {% for key in ris %}
+      <tr>
+        
+          <td>{{key}}</td>
+          <td>{{ris[key]}}</td>
+          <td>{{occ[key]}}</td>
+        
+      </tr>
+      {% endfor %}
+      </tbody>
 	  </table>
     </div>
     <div class="buttons-con">
       <div class="action-link-wrap">
         <a href="http://127.0.0.1:5000" class="link-button">Extract a new label</a>
       </div>
-  </div>
+    </div>
   </body>
 </html>

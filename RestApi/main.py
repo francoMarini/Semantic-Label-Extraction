@@ -2,6 +2,7 @@ import requests
 import tensorflow
 import time
 import datetime
+import configparser
 from requests.exceptions import ConnectionError
 from flask import Flask, render_template, request
 from transformers import pipeline
@@ -9,11 +10,9 @@ app = Flask(__name__)
 
 RECORDS_NUMBER = 100
 
-
+#Funzione che si occupa dell'estrazione della label a partire da una colonna del DB
 def classification(r, labels):
     
-    
-
     # L'utf-8-sig è una variante Python di UTF-8 che ci permette di eliminare, se presenti, eventuali carattere UTF-8 BOM.
     values = r.content.decode('utf-8-sig')
 
@@ -53,12 +52,17 @@ def classification(r, labels):
             label_predict = label
             max_score = score
 
-    return label_predict, max_score, occorrenze[label_predict]
+    return label_predict, max_score, occorrenze[label_predict], risultati, occorrenze
 
 
 
+@app.route('/', methods = ['GET'])
+def init():
+    if request.method == 'GET':
+        return render_template('initial.html')
 
-@app.route('/', methods = ['POST', 'GET'])
+
+@app.route('/form/', methods = ['POST', 'GET'])
 def data():
     if request.method == 'GET':
         return render_template('form.html')
@@ -73,9 +77,13 @@ def datas():
         table = form["table"]
         column = form["column"]
         labels = form["labels"]
-        ip = form["ip"]
-        port = form["port"]
+        #ip = form["ip"]
+        #port = form["port"]
         labels = [elem.strip() for elem in labels.split(',')]
+        config = configparser.ConfigParser()
+        config.read('config.env') 
+        ip = config.get('SERVER', 'SERVER_IP')
+        port = config.get('SERVER', 'SERVER_PORT')
         start = time.time()
         try:
             if ip == "" :
@@ -83,7 +91,7 @@ def datas():
             else:
                url = 'http://' + ip +':'+ port + '/?query=SELECT top '  + str(RECORDS_NUMBER) + ' ' + column + ' ' + 'FROM'+ ' ' + db +'.' + table
             r = requests.get(url)
-            label_predict, max_score, occorrenze = classification(r,labels)
+            label_predict, max_score, occorrenze, risultati, occor = classification(r,labels)
         except ConnectionError:
             return render_template('im.html')
         except IndexError:
@@ -91,8 +99,10 @@ def datas():
         
         final = time.time() - start
         final = int(float("{:.2f}".format(final)))
+        del risultati[label_predict]
+        del occor[label_predict]
         list = [ label_predict,max_score,occorrenze, datetime.timedelta(seconds=final)]
-        return render_template('data.html', form_data=list)
+        return render_template('data.html', form_data=list,ris = risultati, occ = occor)
 
 if __name__ == "__main__":
     app.run(host='127.0.0.1', port=5000)

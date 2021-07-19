@@ -188,8 +188,8 @@
   $(document).ready(function(){
     $("#myform").on("submit", function(){
       $("#pageloader").fadeIn();
-    });//submit
-  });//document ready
+    })
+  })
   </script>
 
     <div id="pageloader">
@@ -202,11 +202,6 @@
       <h1>Semantic Label Extraction</h1>
 
       <form id="myform" action="/data/" method = "POST">
-        <div class="info">
-
-          <input class="fname2" type="text" name="ip" placeholder="Server IP">
-          <input class="fname2" type="text" name="port" placeholder="Port" required>
-        </div>
           <br/><br/>
           <div>
           <input class="fname" type="text" name="db" placeholder="Choose your database" required>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Semantic label extraction</title>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
+    <!-- Add icon library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+      html, body {
+      height: 100%;
+      }
+      body, input, select {
+      padding: 0;
+      margin: 0;
+      outline: none;
+      font-family: Roboto, Arial, sans-serif;
+      font-size: 16px;
+      color: #eee;
+      }
+      h1{
+      font-weight: 400;
+      }
+      h1 {
+      font-size: 32px;
+      color: #2f4f4f;
+      }
+      .main-block, .info {
+      display: flex;
+      flex-direction: column;
+      }
+      .main-block {
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      min-height: 100%;
+      background: url("/uploads/media/default/0001/01/e7a97bd9b2d25886cc7b9115de83b6b28b73b90b.jpeg") no-repeat center;
+      background-size: cover;
+      }
+      
+      a {
+        position: static;
+        margin-right: 800 px;
+        margin-top: 500;
+        background: #6495ed;
+        padding: 8px 25px;
+        border-radius: 4px;
+        color: #FFF;
+        font-weight: bold;
+        font-size: 14px;
+        transition: all 0.3s linear;
+        cursor: pointer;
+        text-decoration: none;
+      }
+      a:hover {
+        background: #5A5C6C;
+        color: #6495ed;
+      }
+    </style>
+  </head>
+  <body>
+    
+    <div class="main-block">
+      <img src="{{url_for('static', filename='pipe.jpg')}}" width="800" ,height="900"  />
+      <h1>Semantic Label Extraction</h1>
+      <a class="button" href="http://127.0.0.1:5000/form/" class="link-button">Start your extraction</a>
+    </div>
+    </div>
+  </body>
+</html>
