@@ -3,6 +3,7 @@
 Per usare l'interfaccia web:
 - Collegarsi da una prima shell al server dove si trova il DB tramite ssh tunneling tramite il comando: ssh -L 8123:speedup.dia.uniroma3.it:8123 -N bigdata2021@speedup.dia.uniroma3.it inserendo la password personale
 - Posizionarsi da una seconda shell nella cartella RestApi
+- Aprire il file config.env e impostare l'indirizzo ip del server e la porta
 - Avviare la WebApi tramite il comando: python main.py
 - Collegarsi a [http://127.0.0.1:5000](http://127.0.0.1:5000)
 

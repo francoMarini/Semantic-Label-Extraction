@@ -2,6 +2,7 @@ import requests
 import tensorflow
 import time
 import datetime
+import json
 import configparser
 from requests.exceptions import ConnectionError
 from flask import Flask, render_template, request
@@ -12,10 +13,8 @@ RECORDS_NUMBER = 100
 
 #Funzione che si occupa dell'estrazione della label a partire da una colonna del DB
 def classification(r, labels):
-    
     # L'utf-8-sig è una variante Python di UTF-8 che ci permette di eliminare, se presenti, eventuali carattere UTF-8 BOM.
     values = r.content.decode('utf-8-sig')
-
     labels_candidate = labels
     values = values.replace("\ufeff", "")
     values = values.replace("\\", " ")
