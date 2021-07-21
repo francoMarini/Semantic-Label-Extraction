@@ -2,16 +2,16 @@
   {
 	"label": "year",
 	"reliability": "67,78%",
-    "forecast_number": "100"
+        "forecast_number": "100"
   },
   {
 	"label": "city",
 	"reliability": "24.01%",
-    "forecast_number": "0"
+        "forecast_number": "0"
   },
   {
 	"label": "producer",
 	"reliability": "8,21%",
-    "forecast_number": "0"
+        "forecast_number": "0"
   }
 ]
